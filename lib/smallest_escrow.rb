@@ -14,16 +14,15 @@ class SmallestEscrow < Sinatra::Base
   end
 
   get '/:uuid' do
-    uuid = params[:uuid]
-    offer = Deal.load(redis, uuid)
-    log("load deal:#{uuid} -> #{offer}")
+    offer = Deal.load(redis, params[:uuid])
+    log("load #{offer}")
     erb :show, :locals => {:offer => offer}
   end
 
   post '/create' do
-    Deal.store(redis, UUID.generate, params)
-    log("save deal:#{uuid} -> #{params}")
-    redirect to("/#{uuid}")
+    offer = Deal.store(redis, UUID.generate, params)
+    log("save {offer}")
+    redirect to("/#{offer.uuid}")
   end
 
   private
