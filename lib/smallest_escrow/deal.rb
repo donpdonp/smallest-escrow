@@ -1,5 +1,5 @@
-
-class Deal
+module SmallestEscrow
+ class Deal
   include DataMapper::Resource
 
   property :uuid,   String, :key => true
@@ -23,5 +23,6 @@ class Deal
   def self.true_store(uuid, params)
     new_deal = create(self.parse(uuid, params))
   end
+ end
 end
 

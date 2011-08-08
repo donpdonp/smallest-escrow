@@ -1,5 +1,4 @@
-task :default => "spec"
+task :default => "test"
 
-task :spec do |t|
-  sh "rspec"
+task :test do |t|
 end

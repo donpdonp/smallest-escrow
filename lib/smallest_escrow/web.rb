@@ -1,7 +1,8 @@
 require 'sinatra/base'
 require 'uuid'
 
-class SmallestEscrow < Sinatra::Base
+module SmallestEscrow
+ class Web < Sinatra::Base
 
   set :static, true
   set :public, "public"
@@ -28,5 +29,6 @@ class SmallestEscrow < Sinatra::Base
     File.open("log","a"){|f| f.write "#{Time.now.strftime("%Y-%m-%d %I:%M%P")} #{msg}\n"}
   end
 
+ end
 end
 
