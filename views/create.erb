@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+ <head>
+ <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+ <link href="dateTimePicker.css" media="screen" rel="stylesheet" type="text/css" />
+ <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.14.custom.css" rel="stylesheet" />	
+ <script src="jquery-1.6.2.min.js"></script>
+ <script src="js/jquery-ui-1.8.14.custom.min.js"></script>
+ <script src="jquery.dateTimePicker.js"></script>
+ </head>
+<body>
+ <script>
+  jQuery(function(){ jQuery("#time1").dateTimePicker(); })
+ </script>
+ <div class="page">
+ <form action="a12cu">
+ 
+ <div class="madmax">
+  Create a contract.
+ </div>
+
+ <div class="row1">
+   <span class=" roundinput">
+    <input size="2"> BTC
+   </span>
+   <span class="">
+    <span>in exchange for</span>
+   </span>
+   <span class=" roundinput">
+    <input size="2"> $USD
+   </span>
+ </div>
+ <div class="submitgo">
+  <input type="submit" value="Create the deal" >
+ </div>
+ </form>
+ </div>
+</body>
+</html>
