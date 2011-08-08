@@ -3,6 +3,7 @@ require 'sinatra/base'
 class SmallestEscrow < Sinatra::Base
 
   set :static, true
+  set :public, "public"
   set :show_execptions, true
   
   get '/' do
