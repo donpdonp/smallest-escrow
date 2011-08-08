@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require 'uuid'
+require 'uuidtools'
 
 module SmallestEscrow
  class Web < Sinatra::Base
@@ -19,7 +19,7 @@ module SmallestEscrow
   end
 
   post '/create' do
-    offer = Deal.true_store(UUID.generate, params)
+    offer = Deal.true_store(UUIDTools::UUID.random_create.to_s, params)
     log("save #{offer}")
     redirect to("/#{offer.uuid}")
   end

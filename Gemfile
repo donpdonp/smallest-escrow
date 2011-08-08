@@ -1,7 +1,7 @@
 source :rubygems
 
 gem 'sinatra'
-gem 'uuid'
+gem 'uuidtools'
 gem 'redis'
 gem 'datamapper'
 gem 'dm-redis-adapter'
