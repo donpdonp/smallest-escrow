@@ -1,6 +1,8 @@
+bitbank.yml
 log
 .bluepill/
 .bundle/
+bitcoin/bitcoin.conf
 bitcoin/.lock
 bitcoin/database/
 bitcoin/__*
