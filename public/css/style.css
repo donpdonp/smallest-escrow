@@ -1,6 +1,7 @@
-.page { margin-left: auto; margin-right: auto; font-size:150%; text-align: center;}
+div.bigpage { margin-left: auto; margin-right: auto; font-size:150%; text-align: center;}
+div.bigpage div { margin-left: 4px;
+                  margin-bottom: 1em; }
 .roundinput input { -webkit-border-radius: 0.2em; -moz-border-radius: 0.2em; border-radius: 0.2em; 
                     height: 1.1em; font-size: 110%;}
-.row1 { margin-left: 4px; }
 .theory {float:left; line-height: 2em; margin: 1em;}
 .submitgo {clear:left;}
