@@ -9,14 +9,13 @@ module SmallestEscrow
   set :show_execptions, true
   
   get '/' do
-    stats = bitcoind_stats
-    erb :create, :locals => {:stats => stats}
+    erb :create, :locals => {:stats => bitcoind_stats}
   end
 
   get '/:uuid' do
     offer = Deal.true_load(params[:uuid])
     log("load #{offer}")
-    erb :show, :locals => {:offer => offer}
+    erb :show, :locals => {:offer => offer, :stats => bitcoind_stats}
   end
 
   post '/create' do
