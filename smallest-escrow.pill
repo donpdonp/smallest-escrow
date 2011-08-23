@@ -19,4 +19,11 @@ Bluepill.application("smallest-escrow", {:base_dir => File.join(BASE_DIR,".bluep
     process.stdout = process.stderr = File.join(BASE_DIR,"log/redis")
   end
 
+  app.process("bitcoind") do |process|
+    process.start_command = "bitcoind -datadir=#{File.join(BASE_DIR,"bitcoin")}"
+    process.working_dir = BASE_DIR
+    process.pid_file = "#{BASE_DIR}/.bluepill/pids/smallest-escrow/bitcoind.pid"
+    process.daemonize = true
+    process.stdout = process.stderr = File.join(BASE_DIR,"log/bitcoind")
+  end
 end

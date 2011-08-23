@@ -1,3 +1,8 @@
 log
 .bluepill/
 .bundle/
+bitcoin/.lock
+bitcoin/database/
+bitcoin/__*
+bitcoin/*.dat
+bitcoin/*.log
