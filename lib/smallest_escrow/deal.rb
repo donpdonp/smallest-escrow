@@ -4,6 +4,7 @@ module SmallestEscrow
 
   property :uuid,   String, :key => true
   property :btc,    String
+  property :btc_receiving_address,    String
   property :usd,    String
 
   def to_s
@@ -13,6 +14,7 @@ module SmallestEscrow
   def self.parse(uuid, data)
     {:uuid => uuid,
      :btc => data["btc"],
+     :btc_receiving_address => data["btc_receiving_address"],
      :usd => data["usd"]}
   end
 

@@ -9,17 +9,19 @@ module SmallestEscrow
   set :show_execptions, true
   
   get '/' do
-    erb :create, :locals => {:stats => bitcoind_stats}
+    erb :create, :locals => {:stats => BITBANK.info}
   end
 
   get '/:uuid' do
     offer = Deal.true_load(params[:uuid])
     log("load #{offer}")
-    erb :show, :locals => {:offer => offer, :stats => bitcoind_stats}
+    erb :show, :locals => {:offer => offer, :stats => BITBANK.info}
   end
 
   post '/create' do
-    offer = Deal.true_store(UUIDTools::UUID.random_create.to_s, params)
+    uuid = UUIDTools::UUID.random_create.to_s
+    deal_params = params.merge("btc_receiving_address" => BITBANK.new_address(uuid))
+    offer = Deal.true_store(uuid, deal_params)
     log("save #{offer}")
     redirect to("/#{offer.uuid}")
   end
@@ -29,10 +31,6 @@ module SmallestEscrow
     time_msg = "#{Time.now.strftime("%Y-%m-%d %I:%M%P")} #{msg}"
     #File.open("log","a"){|f| f.write "#{time_msg}\n"}
     puts time_msg
-  end
-
-  def bitcoind_stats
-    BITBANK.block_count
   end
 
  end
