@@ -1,16 +1,33 @@
-
-Deal #<%= offer.uuid %>
-
- <div class="row1">
-   <span class=" roundinput">
-    <%= offer.btc %> BTC
-   </span>
-   <span class="">
-    <span>has been offered for</span>
-   </span>
-   <span class=" roundinput">
-   <%= offer.usd %> $USD
-   </span>
+<div class="bigpage show">
+ 
+ <div class="dealid">
+  Deal #<%= offer.uuid %>
  </div>
+
+ <div class="terms">
+   <div class="progress">
+     <div class="amount">
+      <%= offer.btc %> BTC
+     </div>
+     <div class="received">
+       Received: no
+     </div>
+     <div class="delivery_address">
+       Delivery address: arc3ubkrc32
+     </div>
+   </div>
+   <div class="progress">
+     <div class="amount">
+      <%= offer.usd %> $USD
+     </div>
+     <div class="received">
+       Received: no
+     </div>
+     <div class="delivery_address">
+       Delivery address: 123-3453
+     </div>
+   </div>
+ </div>
+</div>
 
 
