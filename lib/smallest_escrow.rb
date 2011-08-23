@@ -10,3 +10,4 @@ DataMapper.setup(:default, {:adapter  => "redis", :host => "localhost", :port =>
 
 # bitcoind
 BITBANK = Bitbank.new('bitbank.yml')
+DWOLLA = YAML.load(File.open('dwolla.yml'))
