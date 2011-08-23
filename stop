@@ -1,0 +1,2 @@
+bluepill --no-privileged --base-dir .bluepill stop
+bluepill --no-privileged --base-dir .bluepill quit

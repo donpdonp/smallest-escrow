@@ -1,0 +1,1 @@
+bluepill --no-privileged --base-dir .bluepill load smallest-escrow.pill 

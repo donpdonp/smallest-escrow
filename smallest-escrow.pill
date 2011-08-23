@@ -1,0 +1,22 @@
+BASE_DIR = File.expand_path(File.dirname(__FILE__))
+
+Bluepill.application("smallest-escrow", {:base_dir => File.join(BASE_DIR,".bluepill"),
+                                        :log_file => File.join(BASE_DIR,"log/bluepill")}) do |app|
+  app.process("rack") do |process|
+    #process.start_command = "bundle exec thin -p 4002 --prefix /escrow start"
+    process.start_command = "rackup -p 4002"
+    process.working_dir = BASE_DIR
+    process.pid_file = "#{BASE_DIR}/.bluepill/pids/smallest-escrow/rack.pid"
+    process.daemonize = true
+    process.stdout = process.stderr = File.join(BASE_DIR,"log/rack")
+  end
+
+  app.process("redis") do |process|
+    process.start_command = "redis-server #{File.join(BASE_DIR,"redis.conf")}"
+    process.working_dir = BASE_DIR
+    process.pid_file = "#{BASE_DIR}/.bluepill/pids/smallest-escrow/redis.pid"
+    process.daemonize = true
+    process.stdout = process.stderr = File.join(BASE_DIR,"log/redis")
+  end
+
+end

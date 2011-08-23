@@ -26,7 +26,9 @@ module SmallestEscrow
 
   private
   def log(msg)
-    File.open("log","a"){|f| f.write "#{Time.now.strftime("%Y-%m-%d %I:%M%P")} #{msg}\n"}
+    time_msg = "#{Time.now.strftime("%Y-%m-%d %I:%M%P")} #{msg}"
+    #File.open("log","a"){|f| f.write "#{time_msg}\n"}
+    puts time_msg
   end
 
  end

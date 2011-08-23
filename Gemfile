@@ -1,5 +1,6 @@
 source :rubygems
 
+gem 'rack-mongrel2'
 gem 'sinatra'
 gem 'uuidtools'
 gem 'redis'
