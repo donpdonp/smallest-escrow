@@ -1,8 +1,13 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activesupport (3.0.10)
     addressable (2.2.6)
     bcrypt-ruby (2.1.4)
+    bitbank (0.1.2)
+      activesupport (>= 3.0.7)
+      i18n (>= 0.5.0)
+      rest-client (>= 1.6.3)
     datamapper (1.1.0)
       dm-aggregates (= 1.1.0)
       dm-constraints (= 1.1.0)
@@ -47,7 +52,9 @@ GEM
     ffi (1.0.9)
     ffi-rzmq (0.7.2)
     hiredis (0.3.2)
+    i18n (0.6.0)
     json (1.4.6)
+    mime-types (1.16)
     rack (1.3.2)
     rack-mongrel2 (0.2.3)
       ffi (~> 1.0.0)
@@ -55,6 +62,8 @@ GEM
     rack-test (0.5.6)
       rack (>= 1.0)
     redis (2.2.1)
+    rest-client (1.6.6)
+      mime-types (>= 1.16)
     sinatra (1.2.6)
       rack (~> 1.1)
       tilt (< 2.0, >= 1.2.2)
@@ -66,6 +75,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bitbank
   datamapper
   dm-redis-adapter
   rack-mongrel2

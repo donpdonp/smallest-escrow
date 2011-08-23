@@ -6,6 +6,7 @@ gem 'uuidtools'
 gem 'redis'
 gem 'datamapper'
 gem 'dm-redis-adapter'
+gem 'bitbank'
 
 group :test do
   gem 'rack-test'
