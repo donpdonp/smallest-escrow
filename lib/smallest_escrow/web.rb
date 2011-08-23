@@ -9,7 +9,8 @@ module SmallestEscrow
   set :show_execptions, true
   
   get '/' do
-    erb :create
+    stats = bitcoind_stats
+    erb :create, :locals => {:stats => stats}
   end
 
   get '/:uuid' do
@@ -29,6 +30,10 @@ module SmallestEscrow
     time_msg = "#{Time.now.strftime("%Y-%m-%d %I:%M%P")} #{msg}"
     #File.open("log","a"){|f| f.write "#{time_msg}\n"}
     puts time_msg
+  end
+
+  def bitcoind_stats
+    BITBANK.block_count
   end
 
  end

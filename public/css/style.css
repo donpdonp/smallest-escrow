@@ -6,3 +6,4 @@ div.bigpage div { margin-left: 4px;
                     height: 1.1em; font-size: 110%;}
 .create .submitgo {clear:left;}
 div.progress div {margin-bottom: 0px;}
+div#btcstats { font-size: 70%; margin-left: auto; margin-right: auto; background: lightgray;}
