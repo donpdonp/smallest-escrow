@@ -4,13 +4,13 @@ class Dwolla
     @api = Savon::Client.new { wsdl.document = "https://www.dwolla.com/api/API.svc?wsdl"}
   end
 
-  def request_payment_key(amount, deal)
-    result = DWOLLA_API.request :wsdl, :request_payment_key, 
-                                       { :ApiKey => @config['key'], 
-                                         :ApiCode => @config['secret'], 
-                                         :Amount => amount, 
-                                         :Description => "SE:#{deal.uuid}", 
-                                         :CustomerId => deal.dwolla_receiving_address }
+  def request_payment_key(deal)
+    result = @api.request :wsdl, :request_payment_key, 
+                                 { :ApiKey => @config['key'], 
+                                   :ApiCode => @config['secret'], 
+                                   :Amount => deal.usd, 
+                                   :Description => "SE:#{deal.uuid}", 
+                                   :CustomerId => deal.dwolla_receiving_address }
   end
 
   def receiving_address

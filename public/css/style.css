@@ -1,3 +1,4 @@
+.centered { margin-left: auto; margin-right: auto; }
 div.bigpage { margin-left: auto; margin-right: auto; font-size:150%; text-align: center;}
 div.bigpage div { margin-left: 4px;
                   margin-bottom: 1em; }

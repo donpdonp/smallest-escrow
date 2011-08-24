@@ -8,9 +8,22 @@
  <script>
   jQuery(function(){ })
  </script>
- <div id='btcstats'>
+
+ <div id='btcstats' class="centered">
+   <% if stats %>
    btc status: <%= stats.inspect %>
+   <% else %>
+   bitcoind timeout
+   <% end %>
  </div>
+
+ <% if session[:notice] %>
+ <div id='notice' class="centered">
+  <%= session[:notice] %>
+  <% session[:notice] = nil %>
+ </div>
+ <% end %>
+
  <%= yield %>
 </body>
 </html>
