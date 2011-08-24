@@ -12,4 +12,8 @@ class Dwolla
                                          :Description => "SE:#{deal.uuid}", 
                                          :CustomerId => deal.dwolla_receiving_address }
   end
+
+  def receiving_address
+    @config['receiving_address']
+  end
 end

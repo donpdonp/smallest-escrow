@@ -9,23 +9,36 @@
      <div class="amount">
       <%= offer.btc %> BTC
      </div>
-     <div class="received">
-       Received: no
-     </div>
      <div class="delivery_address">
        Delivery address: <%= offer.btc_receiving_address %>
+     </div>
+     <div>
+       <%= btc_tx.size %> bitcoin transactions received
+       <ul>
+         <% btc_tx.each do |t| %>
+          <li> <%=t%> </li>
+         <% end %>
+       </ul>
      </div>
    </div>
    <div class="progress">
      <div class="amount">
-      <%= offer.usd %> $USD
-     </div>
-     <div class="received">
-       Received: no
+      $<%= offer.usd %> USD
      </div>
      <div class="delivery_address">
-       Delivery address: <%= DWOLLA["receiving_address"] %>
+       Delivery address: <%= DWOLLA.receiving_address %>
      </div>
+
+     <% if offer.dwolla_receiving_address %>
+     <div class="delivery_address">
+       Delivered from address: <%= offer.dwolla_receiving_address %>
+     </div>
+     <% else %>
+     <form action="dwolla_from" method="post"> 
+      Delivered from dwolla account: <input name="dwolla_receiving_address">
+      <input type="hidden" name="uuid" value="<%=offer.uuid%>">
+     </form>
+     <% end %>
    </div>
  </div>
 </div>

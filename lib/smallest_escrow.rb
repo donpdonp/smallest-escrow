@@ -5,6 +5,7 @@ require 'bitbank'
 require 'savon'
 
 require 'smallest_escrow/deal'
+require 'smallest_escrow/dwolla'
 
 # Datamapper
 DataMapper.setup(:default, {:adapter  => "redis", :host => "localhost", :port => 6380})
