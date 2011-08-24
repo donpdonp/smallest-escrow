@@ -2,6 +2,7 @@ require 'dm-core'
 require 'dm-redis-adapter'
 require 'redis'
 require 'bitbank'
+require 'savon'
 
 require 'smallest_escrow/deal'
 
@@ -10,4 +11,6 @@ DataMapper.setup(:default, {:adapter  => "redis", :host => "localhost", :port =>
 
 # bitcoind
 BITBANK = Bitbank.new('bitbank.yml')
-DWOLLA = YAML.load(File.open('dwolla.yml'))
+
+# Dwolla
+DWOLLA = Dwolla.new('dwolla.yml')

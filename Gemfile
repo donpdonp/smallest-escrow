@@ -7,6 +7,7 @@ gem 'redis'
 gem 'datamapper'
 gem 'dm-redis-adapter'
 gem 'bitbank'
+gem 'savon'
 
 group :test do
   gem 'rack-test'

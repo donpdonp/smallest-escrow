@@ -3,11 +3,14 @@ GEM
   specs:
     activesupport (3.0.10)
     addressable (2.2.6)
+    akami (1.0.0)
+      gyoku (>= 0.4.0)
     bcrypt-ruby (2.1.4)
     bitbank (0.1.2)
       activesupport (>= 3.0.7)
       i18n (>= 0.5.0)
       rest-client (>= 1.6.3)
+    builder (3.0.0)
     datamapper (1.1.0)
       dm-aggregates (= 1.1.0)
       dm-constraints (= 1.1.0)
@@ -51,10 +54,16 @@ GEM
     fastercsv (1.5.4)
     ffi (1.0.9)
     ffi-rzmq (0.7.2)
+    gyoku (0.4.4)
+      builder (>= 2.1.2)
     hiredis (0.3.2)
+    httpi (0.9.5)
+      rack
     i18n (0.6.0)
     json (1.4.6)
     mime-types (1.16)
+    nokogiri (1.5.0)
+    nori (1.0.2)
     rack (1.3.2)
     rack-mongrel2 (0.2.3)
       ffi (~> 1.0.0)
@@ -64,12 +73,22 @@ GEM
     redis (2.2.1)
     rest-client (1.6.6)
       mime-types (>= 1.16)
+    savon (0.9.6)
+      akami (~> 1.0)
+      builder (>= 2.1.2)
+      gyoku (>= 0.4.0)
+      httpi (~> 0.9)
+      nokogiri (>= 1.4.0)
+      nori (~> 1.0)
+      wasabi (~> 2.0)
     sinatra (1.2.6)
       rack (~> 1.1)
       tilt (< 2.0, >= 1.2.2)
     stringex (1.2.2)
     tilt (1.3.2)
     uuidtools (2.1.2)
+    wasabi (2.0.0)
+      nokogiri (>= 1.4.0)
 
 PLATFORMS
   ruby
@@ -81,5 +100,6 @@ DEPENDENCIES
   rack-mongrel2
   rack-test
   redis
+  savon
   sinatra
   uuidtools
