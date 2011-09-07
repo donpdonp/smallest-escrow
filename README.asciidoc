@@ -1,7 +1,7 @@
 Smallest Escrow Service
 =======================
 
-This ruby sinatra app does the minimal amount possible to execute a trade
+This ruby sinatra web site does the minimal amount possible to execute a trade
 between two parties. Its made to trade Bitcoin for USD using bitcoind and
 dwolla.com to perform the transfer.
 
