@@ -61,7 +61,10 @@ module SmallestEscrow
   post "/btc_refund" do
     offer = Deal.true_load(params[:uuid])
     btc_tx = BITBANK.account_by_address(offer.btc_receiving_address).transactions
-    tx = btc_tx.select{|tx| tx.txid = params[:txid]}
+    tx = btc_tx.select{|tx| tx.txid == params[:txid]}.first
+    if tx
+      log("found tx #{tx.txid} to refund")
+    end
     redirect to("/#{offer.uuid}")
   end
 
