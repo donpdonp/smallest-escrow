@@ -8,6 +8,7 @@ gem 'datamapper'
 gem 'dm-redis-adapter'
 gem 'bitbank'
 gem 'savon'
+gem 'faraday'
 
 group :test do
   gem 'rack-test'
