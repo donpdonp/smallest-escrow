@@ -17,7 +17,7 @@
        <%= btc_tx.size %> bitcoin transactions received
        <ul>
          <% btc_tx.each do |t| %>
-          <li> <%=t%> </li>
+          <li> <%=t.address%> <%=t.amount%> <%=t.confirmations%> </li>
          <% end %>
        </ul>
      </div>
