@@ -17,7 +17,14 @@
        <%= btc_tx.size %> bitcoin transactions received
        <ul>
          <% btc_tx.each do |t| %>
-          <li> <%=t.address%> <%=t.amount%> <%=t.confirmations%> </li>
+          <li> 
+            <%=t.txid%> <%=t.amount%> <%=t.confirmations%> 
+            <form action="btc_refund" method="post">
+              <input type="hidden" name="uuid" value="<%=offer.uuid%>">
+              <input type="hidden" name="txid" value="<%=offer.txid%>">
+              <input type="submit" value="Refund">
+            </form>
+          </li>
          <% end %>
        </ul>
      </div>

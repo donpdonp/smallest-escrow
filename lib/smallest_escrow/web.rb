@@ -58,6 +58,13 @@ module SmallestEscrow
     redirect to("/#{offer.uuid}")
   end
 
+  post "/btc_refund" do
+    offer = Deal.true_load(params[:uuid])
+    btc_tx = BITBANK.account_by_address(offer.btc_receiving_address).transactions
+    tx = btc_tx.select{|tx| tx.txid = params[:txid]}
+    redirect to("/#{offer.uuid}")
+  end
+
   private
   def log(msg)
     time_msg = "#{Time.now.strftime("%Y-%m-%d %I:%M%P")} #{msg}"
