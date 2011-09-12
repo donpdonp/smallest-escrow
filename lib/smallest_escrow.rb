@@ -4,6 +4,7 @@ require 'redis'
 require 'bitbank'
 require 'savon'
 require 'faraday'
+require 'oauth'
 
 require 'smallest_escrow/deal'
 require 'smallest_escrow/dwolla'

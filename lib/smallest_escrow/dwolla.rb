@@ -6,9 +6,16 @@ class Dwolla
               builder.request  :json
               builder.adapter  :net_http
             end
+    @accountapi = "https://www.dwolla.com/oauth/rest/accountapi/"
+    @oauth_consumer = OAuth::Consumer.new(@config['key'], 
+                                          @config['secret'], 
+                                          :site => "https://www.dwolla.com",
+                                          :request_token_path => "/oauth/oauth.ashx",
+                                          :authorize_path => "/oauth/oauth.ashx",
+                                          :access_token_path => "/oauth/oauth.ashx" )
   end
 
-  # GRID API
+  # Offsite Payments API
   def request(deal)
     data = { :Key => @config['key'],
              :Secret => @config['secret'],
@@ -27,6 +34,11 @@ class Dwolla
 
   def checkout(id)
     "https://www.dwolla.com/payment/checkout/#{id}"
+  end
+
+  # REST API
+  def request_token
+    @request_token = @oauth_consumer.get_request_token(:oauth_callback => "http://donpark.org/escrow/dwolla/oauth")
   end
 
   # SOAP API
