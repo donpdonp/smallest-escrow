@@ -18,10 +18,11 @@
        <ul>
          <% btc_tx.each do |t| %>
           <li> 
-            <%=t.txid%> <%=t.amount%> <%=t.confirmations%> 
+            <%=t.category%> <%=t.amount%> <%=t.confirmations%> 
             <form action="btc_refund" method="post">
               <input type="hidden" name="uuid" value="<%=offer.uuid%>">
               <input type="hidden" name="txid" value="<%=t.txid%>">
+              <input name="tobitcoinaddress">
               <input type="submit" value="Refund">
             </form>
           </li>
