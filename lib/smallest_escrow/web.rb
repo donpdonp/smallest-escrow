@@ -83,7 +83,8 @@ module SmallestEscrow
     redirect to(DWOLLA.request_token.authorize_url)
   end
 
-  post "/dwolla/oauth" do
+  get "/dwolla/oauth" do
+    access_token = DWOLLA.access_token(params[:oauth_token])
     redirect to("/admin")
   end
 
