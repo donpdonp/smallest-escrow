@@ -13,9 +13,9 @@ class Dwolla
     data = { :Key => @config['key'],
              :Secret => @config['secret'],
              :PurchaseOrder => {
-                    :DestinationId => deal.dwolla_receiving_address,
+                    :DestinationId => DWOLLA.receiving_address,
                          :Discount => 0,
-                       :OrderItems => [:Name => "Bitcoin Escrow",
+                       :OrderItems => [:Name => "Bitcoin Escrow deal ##{deal.uuid}",
                                        :Price => deal.usd,
                                        :Quantity => 1],
                          :Shipping => 0,
