@@ -63,7 +63,9 @@ module SmallestEscrow
     btc_tx = BITBANK.account_by_address(offer.btc_receiving_address).transactions
     tx = btc_tx.select{|tx| tx.txid == params[:txid]}.first
     if tx
-      log("found tx #{tx.txid} to refund")
+      session[:notice] = "#{tx.amount} has been refunded."
+    else
+      session[:notice] = "Transaction #{tx.txid} not found"
     end
     redirect to("/#{offer.uuid}")
   end
