@@ -23,7 +23,7 @@
             <form action="btc_refund" method="post">
               <input type="hidden" name="uuid" value="<%=offer.uuid%>">
               <input type="hidden" name="txid" value="<%=t.txid%>">
-              <input name="tobitcoinaddress" size="30">
+              <input name="tobitcoinaddress" size="32" placeholder="receiving bitcoin address">
               <input type="submit" value="Refund">
             </form>
             <% end %>
