@@ -74,6 +74,19 @@ module SmallestEscrow
     redirect to("/#{offer.uuid}")
   end
 
+  # admin
+  get "/admin/" do
+    erb :admin, :locals => {:stats => BITBANK.info}
+  end
+
+  get "/dwolla/auth" do
+    redirect to(DWOLLA.request_token.authorize_url)
+  end
+
+  post "/dwolla/oauth" do
+    redirect to("/admin")
+  end
+
   private
   def log(msg)
     time_msg = "#{Time.now.strftime("%Y-%m-%d %I:%M%P")} #{msg}"
