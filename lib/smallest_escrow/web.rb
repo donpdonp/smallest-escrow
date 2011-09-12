@@ -45,15 +45,14 @@ module SmallestEscrow
     offer.dwolla_receiving_address = params[:dwolla_receiving_address]
     offer.save
     log("#{offer} updated with dwolla receiving address #{offer.dwolla_receiving_address}")
-    response = DWOLLA.request_payment_key(offer)
-    body = response.hash[:envelope][:body]
-    if response.success? && body[:request_payment_key_response] == true
-      offer.dwolla_request_payment_key = "?"
+    response = DWOLLA.request(offer)
+    log("#{offer} dwolla response #{response.inspect}")
+    if response["Result"] == "Success"
+      offer.dwolla_request_payment_key = response["CheckoutId"]
       offer.save
-      log("#{offer} updated with dwolla receiving address #{body.inspect}")
-      session[:notice] = "Dwolla success!"
+      redirect to("https://www.dwolla.com/payment/checkout/"+response["CheckoutId"])
     else
-      session[:notice] = "Dwolla failure: #{body.inspect}"
+      session[:notice] = "Dwolla failure: #{response["Message"]}"
     end
     redirect to("/#{offer.uuid}")
   end

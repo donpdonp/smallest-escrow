@@ -10,10 +10,19 @@ class Dwolla
 
   # GRID API
   def request(deal)
-    result = @rest.post('/payment/request', { :Key => @config['key'],
-                                              :Secret => @config['secret'],
-                                              :DestinationId => deal.dwolla_receiving_address ,
-                                              :Total => deal.usd })
+    data = { :Key => @config['key'],
+             :Secret => @config['secret'],
+             :PurchaseOrder => {
+                    :DestinationId => deal.dwolla_receiving_address,
+                         :Discount => 0,
+                       :OrderItems => [:Name => "Bitcoin Escrow",
+                                       :Price => deal.usd,
+                                       :Quantity => 1],
+                         :Shipping => 0,
+                              :Tax => 0,
+                            :Total => deal.usd }}
+    result = @rest.post('/payment/request', data)
+    JSON.parse(result.body)
   end
 
   def checkout(id)
