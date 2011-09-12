@@ -60,10 +60,15 @@ module SmallestEscrow
 
   post "/btc_refund" do
     offer = Deal.true_load(params[:uuid])
-    btc_tx = BITBANK.account_by_address(offer.btc_receiving_address).transactions
-    tx = btc_tx.select{|tx| tx.txid == params[:txid]}.first
+    btc_account = BITBANK.account_by_address(offer.btc_receiving_address)
+    tx = btc_account.transactions.select{|tx| tx.txid == params[:txid]}.first
     if tx
-      session[:notice] = "#{params[:amount]} has been refunded. "
+      rtx = btc_account.pay(params[:tobitcoinaddress], tx.amount)
+      if rtx
+        session[:notice] = "#{rtx.amount} has been refunded."
+      else
+        session[:notice] = "refund failed."
+      end
     else
       session[:notice] = "Transaction #{tx.txid} not found"
     end
