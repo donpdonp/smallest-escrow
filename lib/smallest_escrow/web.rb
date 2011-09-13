@@ -93,6 +93,7 @@ module SmallestEscrow
 
   get "/dwolla/auth" do
     request_token = DWOLLA.request_token
+    log("dwolla/auth: request #{request_token.inspect}")
     session[:request_token] = request_token
     redirect to(request_token.authorize_url)
   end
