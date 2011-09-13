@@ -16,4 +16,4 @@ DataMapper.setup(:default, {:adapter  => "redis", :host => "localhost", :port =>
 BITBANK = Bitbank.new('bitbank.yml')
 
 # Dwolla
-DWOLLA = Dwolla.new('dwolla.yml')
+DWOLLA = SmallestEscrow::Dwolla::API.new('dwolla.yml')
