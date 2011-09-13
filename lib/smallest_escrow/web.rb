@@ -92,8 +92,9 @@ module SmallestEscrow
 
   get "/dwolla/oauth" do
     log("dwolla/oauth: #{params.inspect}")
-    log(session[:request_token].inspect)
+    log("dwolla/oauth: request #{session[:request_token].inspect}")
     access_token = DWOLLA.access_token(session[:request_token])
+    log("dwolla/oauth: access #{access_token}")
     redirect to("/admin")
   end
 
