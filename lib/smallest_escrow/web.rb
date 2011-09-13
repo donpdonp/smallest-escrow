@@ -18,8 +18,8 @@ module SmallestEscrow
     erb :create, :locals => {:stats => stats}
   end
 
-  get '/:uuid' do
-    offer = Deal.true_load(params[:uuid])
+  get %r{/([a-z0-9-]{36})} do
+    offer = Deal.true_load(params[:captures].first)
     log("load #{offer}")
     begin
       timer = Time.now
@@ -75,7 +75,7 @@ module SmallestEscrow
   end
 
   # admin
-  get "/admin/" do
+  get "/admin" do
     erb :admin, :locals => {:stats => BITBANK.info}
   end
 
