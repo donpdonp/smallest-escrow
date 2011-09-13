@@ -3,4 +3,4 @@ secret:
 receiving_address:
 soap_key:
 soap_secret:
-oauth_callback: http://localhost/dwolla/oauth
+host: http://localhost/

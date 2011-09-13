@@ -21,6 +21,8 @@ module SmallestEscrow
       def request(deal)
         data = { :Key => @config['key'],
                  :Secret => @config['secret'],
+                 :Callback => @config['host']+"/dwolla/payment",
+                 :Redirect => @config['host']+"/#{deal.uuid}"
                  :PurchaseOrder => {
                         :DestinationId => DWOLLA.receiving_address,
                              :Discount => 0,
@@ -40,7 +42,7 @@ module SmallestEscrow
 
       # REST API
       def request_token(scope = 'AccountAPI:transactions|AccountAPI:send')
-        @oauth_consumer.get_request_token({:oauth_callback => @config['oauth_callback']},
+        @oauth_consumer.get_request_token({:oauth_callback => @config['host']+"/dwolla/oauth"},
                                           {:scope => scope})
         # One time setup: admin visits @request_token.authorize_url to enable app with escrow dwolla account
       end

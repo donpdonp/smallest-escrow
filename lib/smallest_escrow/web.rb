@@ -30,12 +30,9 @@ module SmallestEscrow
       session[:notice] = "bitcoind timed out"
     end
     cred = SmallestEscrow::Dwolla::Auth.get_token
-    log("dwolla: cred #{cred.inspect}")
     dwolla_at = DWOLLA.access_token(cred)
-    log("dwolla: #{dwolla_at.inspect}")
-    dwolla_tx = dwolla_at.get("https://www.dwolla.com/oauth/rest/accountapi/transactions")
-    log("dwolla: tx #{dwolla_tx.body}")
-    erb :show, :locals => {:offer => offer, :stats => stats, :btc_tx => btc_tx}
+    dwolla_tx = JSON.parse(dwolla_at.get("https://www.dwolla.com/oauth/rest/accountapi/transactions"))
+    erb :show, :locals => {:offer => offer, :stats => stats, :btc_tx => btc_tx, :dwolla_tx => dwolla_tx}
   end
 
   post '/create' do
