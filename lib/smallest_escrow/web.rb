@@ -29,7 +29,9 @@ module SmallestEscrow
     rescue RestClient::RequestTimeout
       session[:notice] = "bitcoind timed out"
     end
-    dwolla_at = DWOLLA.access_token
+    cred = SmallestEscrow::Dwolla::Auth.get_token
+    log("dwolla: cred #{cred.inspect}")
+    dwolla_at = DWOLLA.access_token(cred)
     log("dwolla: #{dwolla_at.inspect}")
     dwolla_tx = dwolla_at.get("https://www.dwolla.com/oauth/rest/accountapi/transactions")
     log("dwolla: #{dwolla_tx.inspect}")
