@@ -34,7 +34,7 @@ module SmallestEscrow
     dwolla_at = DWOLLA.access_token(cred)
     log("dwolla: #{dwolla_at.inspect}")
     dwolla_tx = dwolla_at.get("https://www.dwolla.com/oauth/rest/accountapi/transactions")
-    log("dwolla: #{dwolla_tx.inspect}")
+    log("dwolla: tx #{dwolla_tx.body}")
     erb :show, :locals => {:offer => offer, :stats => stats, :btc_tx => btc_tx}
   end
 
