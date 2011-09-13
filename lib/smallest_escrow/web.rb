@@ -77,7 +77,8 @@ module SmallestEscrow
   # admin
   get "/admin" do
     begin
-      erb :admin, :locals => {:stats => BITBANK.info}
+      erb :admin, :locals => {:stats => BITBANK.info, 
+                              :dwolla_token => SmallestEscrow::Dwolla::Auth.get_token}
     rescue RestClient::RequestTimeout
       session[:notice] = "bitcoind timed out"
     end
@@ -90,10 +91,15 @@ module SmallestEscrow
     redirect to(request_token.authorize_url)
   end
 
+  get "/dwolla/deauth" do
+    SmallestEscrow::Dwolla::Auth.remove_token
+    redirect to("/admin")
+  end
+
   get "/dwolla/oauth" do
     log("dwolla/oauth: #{params.inspect}")
     log("dwolla/oauth: request #{session[:request_token].inspect}")
-    access_token = DWOLLA.access_token(session[:request_token])
+    access_token = DWOLLA.save_access_token(session[:request_token])
     log("dwolla/oauth: access #{access_token.token} #{access_token.secret}")
     redirect to("/admin")
   end

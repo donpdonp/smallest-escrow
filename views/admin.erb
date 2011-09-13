@@ -1,6 +1,12 @@
 Admin
 
 <ul>
- <li> <a href="./dwolla/auth">auth dwolla</a> </li>
+ <li> 
+    <% if dwolla_token %>
+      Dwolla Authorized (<a href="./dwolla/deauth">remove</a>)
+    <% else %>
+      <a href="./dwolla/auth">auth dwolla</a> 
+    <% end %>
+ </li>
 
 </ul>

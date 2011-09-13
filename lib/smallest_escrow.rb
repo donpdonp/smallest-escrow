@@ -7,7 +7,8 @@ require 'faraday'
 require 'oauth'
 
 require 'smallest_escrow/deal'
-require 'smallest_escrow/dwolla'
+require 'smallest_escrow/dwolla/api'
+require 'smallest_escrow/dwolla/auth'
 
 # Datamapper
 DataMapper.setup(:default, {:adapter  => "redis", :host => "localhost", :port => 6380})
