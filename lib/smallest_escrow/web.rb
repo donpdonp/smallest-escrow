@@ -24,14 +24,17 @@ module SmallestEscrow
     begin
       timer = Time.now
       btc_tx = BITBANK.account_by_address(offer.btc_receiving_address).transactions
-      log("transactions loaded in #{Time.now - timer} seconds")
+      log("bitcoin transactions loaded in #{Time.now - timer} seconds")
       stats = BITBANK.info
     rescue RestClient::RequestTimeout
       session[:notice] = "bitcoind timed out"
     end
+    timer = Time.now
     cred = SmallestEscrow::Dwolla::Auth.get_token
     dwolla_at = DWOLLA.access_token(cred)
     dwolla_tx = JSON.parse(dwolla_at.get("https://www.dwolla.com/oauth/rest/accountapi/transactions"))
+    log("dwolla transactions loaded in #{Time.now - timer} seconds")
+    log("dwolla transactions: #{dwolla_tx.inspect}")
     erb :show, :locals => {:offer => offer, :stats => stats, :btc_tx => btc_tx, :dwolla_tx => dwolla_tx}
   end
 
