@@ -76,7 +76,12 @@ module SmallestEscrow
 
   # admin
   get "/admin" do
-    erb :admin, :locals => {:stats => BITBANK.info}
+    begin
+      erb :admin, :locals => {:stats => BITBANK.info}
+    rescue RestClient::RequestTimeout
+      session[:notice] = "bitcoind timed out"
+    end
+
   end
 
   get "/dwolla/auth" do
