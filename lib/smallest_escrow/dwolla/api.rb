@@ -45,9 +45,8 @@ module SmallestEscrow
         # One time setup: admin visits @request_token.authorize_url to enable app with escrow dwolla account
       end
 
-      def access_token
-        token = Auth.get_token
-        OAuth::AccessToken.new(@oauth_consumer, token.token, token.secret)
+      def access_token(cred)
+        OAuth::AccessToken.new(@oauth_consumer, cred.token, cred.secret)
       end
 
       def save_access_token(blessed_request_token)
