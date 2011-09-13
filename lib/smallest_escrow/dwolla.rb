@@ -38,13 +38,13 @@ class Dwolla
 
   # REST API
   def request_token(scope = 'AccountAPI:balance|AccountAPI:send')
-    @oauth_consumer.get_request_token({:oauth_callback => "http://donpark.org/escrow/dwolla/oauth"},
+    @oauth_consumer.get_request_token({:oauth_callback => @config['oauth_callback']},
                                       {:scope => scope})
     # One time setup: admin visits @request_token.authorize_url to enable app with escrow dwolla account
   end
 
   def access_token(blessed_request_token)
-
+    blessed_request_token.get_access_token
   end
 
   # SOAP API
