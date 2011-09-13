@@ -29,6 +29,10 @@ module SmallestEscrow
     rescue RestClient::RequestTimeout
       session[:notice] = "bitcoind timed out"
     end
+    dwolla_at = DWOLLA.access_token
+    log("dwolla: #{dwolla_at.inspect}")
+    dwolla_tx = dwolla_at.get("https://www.dwolla.com/oauth/rest/accountapi/transactions")
+    log("dwolla: #{dwolla_tx.inspect}")
     erb :show, :locals => {:offer => offer, :stats => stats, :btc_tx => btc_tx}
   end
 

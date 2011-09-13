@@ -39,10 +39,15 @@ module SmallestEscrow
       end
 
       # REST API
-      def request_token(scope = 'AccountAPI:balance|AccountAPI:send')
+      def request_token(scope = 'AccountAPI:transactions|AccountAPI:send')
         @oauth_consumer.get_request_token({:oauth_callback => @config['oauth_callback']},
                                           {:scope => scope})
         # One time setup: admin visits @request_token.authorize_url to enable app with escrow dwolla account
+      end
+
+      def access_token
+        token = Auth.get_token
+        OAuth::AccessToken.new(@oauth_consumer, token.token, token.secret)
       end
 
       def save_access_token(blessed_request_token)
