@@ -22,7 +22,7 @@ module SmallestEscrow
         data = { :Key => @config['key'],
                  :Secret => @config['secret'],
                  :Callback => @config['host']+"/dwolla/payment",
-                 :Redirect => @config['host']+"/#{deal.uuid}"
+                 :Redirect => @config['host']+"/#{deal.uuid}",
                  :PurchaseOrder => {
                         :DestinationId => DWOLLA.receiving_address,
                              :Discount => 0,
