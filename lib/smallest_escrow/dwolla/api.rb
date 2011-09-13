@@ -49,11 +49,6 @@ module SmallestEscrow
         OAuth::AccessToken.new(@oauth_consumer, cred.token, cred.secret)
       end
 
-      def save_access_token(blessed_request_token)
-        access_token = blessed_request_token.get_access_token
-        Auth.save_token(access_token)
-      end
-
       # SOAP API
       def request_payment_key(deal)
         result = @soap.request :wsdl, :request_payment_key, 
