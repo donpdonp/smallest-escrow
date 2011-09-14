@@ -113,6 +113,10 @@ module SmallestEscrow
     redirect to("/admin")
   end
 
+  get "/dwolla/payment" do
+    log("dwolla/payment: #{params.inspect}")
+  end
+
   private
   def log(msg)
     time_msg = "#{Time.now.strftime("%Y-%m-%d %I:%M%P")} #{msg}"
