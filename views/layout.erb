@@ -11,7 +11,7 @@
 
  <div id='btcstats' class="centered">
    <% if stats %>
-   btc status: <%= stats.inspect %>
+   bitcoind: <%= ["version", "blocks", "connections", "difficulty"].map{|k| "#{k} => #{stats[k]}"} %>
    <% else %>
    bitcoind timeout
    <% end %>
