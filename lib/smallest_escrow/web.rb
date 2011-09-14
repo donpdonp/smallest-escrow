@@ -32,7 +32,7 @@ module SmallestEscrow
     timer = Time.now
     cred = SmallestEscrow::Dwolla::Auth.get_token
     dwolla_at = DWOLLA.access_token(cred)
-    dwolla_tx = JSON.parse(dwolla_at.get("https://www.dwolla.com/oauth/rest/accountapi/transactions").body)
+    dwolla_tx = []#JSON.parse(dwolla_at.get("https://www.dwolla.com/oauth/rest/accountapi/transactions").body)
     log("dwolla transactions loaded in #{Time.now - timer} seconds")
     log("dwolla transactions: #{dwolla_tx.inspect}")
     erb :show, :locals => {:offer => offer, :stats => stats, :btc_tx => btc_tx, :dwolla_tx => dwolla_tx}
@@ -48,9 +48,6 @@ module SmallestEscrow
 
   post '/dwolla_from' do
     offer = Deal.true_load(params[:uuid])
-    offer.dwolla_receiving_address = params[:dwolla_receiving_address]
-    offer.save
-    log("#{offer} updated with dwolla receiving address #{offer.dwolla_receiving_address}")
     response = DWOLLA.request(offer)
     log("#{offer} dwolla response #{response.inspect}")
     if response["Result"] == "Success"
@@ -115,6 +112,9 @@ module SmallestEscrow
 
   post "/dwolla/payment/*" do |uuid|
     log("dwolla/payment: uuid: #{uuid} params: #{params.inspect}")
+    jparams = JSON.parse(request.body.read)
+    log("dwolla/payment: jparams #{jparams.inspect}")
+    deal = Deal.true_load(uuid)
   end
 
   private

@@ -7,7 +7,7 @@ module SmallestEscrow
   property :btc_receiving_address,    String
   property :usd,    String
   property :dwolla_request_payment_key, String
-  property :dwolla_receiving_address, String
+  property :dwolla_tx_id, String
 
   def to_s
     "Deal ##{uuid}"
