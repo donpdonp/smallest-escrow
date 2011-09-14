@@ -44,12 +44,15 @@
        Escrow Dwolla account: <%= DWOLLA.receiving_address %>
      </div>
 
-     <form action="dwolla_from" method="post"> 
-      <!-- Delivered from dwolla account: <input name="dwolla_receiving_address"> -->
-      Initiate transfer: 
-      <input type="hidden" name="uuid" value="<%=offer.uuid%>">
-      <input type="submit" value="Dwolla Transfer">
-     </form>
+      <% if offer.usd_paid? %>
+        Paid. Transaction id #<%= offer.dwolla_tx_id%>
+      <% else %>
+       <form action="dwolla_from" method="post"> 
+        Initiate transfer: 
+        <input type="hidden" name="uuid" value="<%=offer.uuid%>">
+        <input type="submit" value="Dwolla Transfer">
+       </form>
+     <% end %>
    </div>
  </div>
 </div>

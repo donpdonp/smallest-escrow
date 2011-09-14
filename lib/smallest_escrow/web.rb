@@ -115,6 +115,8 @@ module SmallestEscrow
     jparams = JSON.parse(request.body.read)
     log("dwolla/payment: jparams #{jparams.inspect}")
     deal = Deal.true_load(uuid)
+    deal.dwolla_tx_id = jparams["TransactionId"]
+    deal.save
   end
 
   private
