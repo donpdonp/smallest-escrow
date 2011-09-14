@@ -9,10 +9,6 @@ module SmallestEscrow
   property :dwolla_request_payment_key, String
   property :dwolla_tx_id, String
 
-  def to_s
-    "Deal ##{uuid}"
-  end
-
   def self.parse(uuid, data)
     {:uuid => uuid,
      :btc => data["btc"],
@@ -26,6 +22,14 @@ module SmallestEscrow
 
   def self.true_store(uuid, params)
     new_deal = create(self.parse(uuid, params))
+  end
+
+  def to_s
+    "Deal ##{uuid}"
+  end
+
+  def usd_paid?
+    !!dwolla_tx_id
   end
  end
 end
