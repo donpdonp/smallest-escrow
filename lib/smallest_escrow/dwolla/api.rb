@@ -18,10 +18,14 @@ module SmallestEscrow
       end
 
       # Offsite Payments API
+
+      # Redirect path comes back with extra fields:
+      # checkoutid=b32683b5-9597-42a8-a8c8-741633e07d2f&transaction=257871&postback=failure&orderid=1.1771473012599911E+38
+      # Callback is a POST with JSON in the body: '{"Amount":1.0000,"OrderId":null,"Status":"Completed","TransactionId":257892,"TestMode":false}'
       def request(deal)
         data = { :Key => @config['key'],
                  :Secret => @config['secret'],
-                 :Callback => @config['host']+"/dwolla/payment",
+                 :Callback => @config['host']+"/dwolla/payment/#{deal.uuid}",
                  :Redirect => @config['host']+"/#{deal.uuid}",
                  :PurchaseOrder => {
                         :DestinationId => DWOLLA.receiving_address,
