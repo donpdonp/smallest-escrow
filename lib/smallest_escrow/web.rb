@@ -113,7 +113,7 @@ module SmallestEscrow
     redirect to("/admin")
   end
 
-  get "/dwolla/payment/*" do |uuid|
+  post "/dwolla/payment/*" do |uuid|
     log("dwolla/payment: uuid: #{uuid} params: #{params.inspect}")
   end
 
