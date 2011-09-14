@@ -21,7 +21,6 @@ module SmallestEscrow
       def request(deal)
         data = { :Key => @config['key'],
                  :Secret => @config['secret'],
-                 :OrderId => deal.uuid.gsub('-',''),
                  :Callback => @config['host']+"/dwolla/payment",
                  :Redirect => @config['host']+"/#{deal.uuid}",
                  :PurchaseOrder => {
