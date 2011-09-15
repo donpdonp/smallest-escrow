@@ -114,11 +114,11 @@ module SmallestEscrow
   end
 
   post "/dwolla/payment" do
-    log("dwolla/payment: params: #{params.inspect}")
     jparams = JSON.parse(request.body.read)
     log("dwolla/payment: jparams #{jparams.inspect}")
     deal = Deal.true_load(jparams["OrderId"])
     if deal.dwolla_checkout_id == jparams["CheckoutId"]
+      log("dwolla/payment: CheckId matches. Saving TransactionId")
       deal.dwolla_tx_id = jparams["TransactionId"]
       deal.save
     end

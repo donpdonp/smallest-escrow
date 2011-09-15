@@ -31,7 +31,7 @@ module SmallestEscrow
                  :PurchaseOrder => {
                         :DestinationId => DWOLLA.receiving_address,
                              :Discount => 0,
-                           :OrderItems => [:Name => "Bitcoin Escrow deal ##{deal.uuid}",
+                           :OrderItems => [:Name => "Bitcoin Escrow #{deal.btc}BTC for $#{deal.usd}USD deal ##{deal.uuid}",
                                            :Price => deal.usd,
                                            :Quantity => 1],
                              :Shipping => 0,
