@@ -114,7 +114,7 @@ module SmallestEscrow
   end
 
   post "/dwolla/payment" do
-    log("dwolla/payment: uuid: #{uuid} params: #{params.inspect}")
+    log("dwolla/payment: params: #{params.inspect}")
     jparams = JSON.parse(request.body.read)
     log("dwolla/payment: jparams #{jparams.inspect}")
     deal = Deal.true_load(jparams["OrderId"])
