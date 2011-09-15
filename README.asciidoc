@@ -1,11 +1,13 @@
 Smallest Escrow Service
 =======================
 
-This ruby sinatra web site does the minimal amount possible to execute a trade
-between two parties. Its made to trade Bitcoin for USD using bitcoind and
-dwolla.com to perform the transfer.
+Trade Bitcoin for USD using bitcoind and dwolla.com to perform the transfer.
 
 Escrow services are useful because its easier (in theory) to trust an escrow
 service than a receiving party due to motivations. An escrow service is willing
 to be a public entity with a verifiable identity when two parties with no
 mutual history want to trade value.
+
+Setup
+=====
+copy config.yml.sample to config.yml and fill in the blanks. use './start' to begin.
