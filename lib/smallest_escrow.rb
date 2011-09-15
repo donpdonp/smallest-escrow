@@ -7,6 +7,7 @@ require 'faraday'
 require 'oauth'
 
 require 'smallest_escrow/deal'
+require 'smallest_escrow/util'
 require 'smallest_escrow/dwolla/api'
 require 'smallest_escrow/dwolla/auth'
 

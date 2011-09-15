@@ -10,10 +10,9 @@
  </script>
 
  <div id='btcstats' class="centered">
+   bitcoind:
    <% if stats %>
-   bitcoind: <%= ["version", "blocks", "connections", "difficulty"].map{|k| "#{k} => #{stats[k]}"} %>
-   <% else %>
-   bitcoind timeout
+     <%= ["version", "blocks", "connections", "difficulty"].map{|k| "#{k} => #{stats[k]}"} %>
    <% end %>
  </div>
 

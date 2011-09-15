@@ -15,7 +15,7 @@ module SmallestEscrow
     rescue RestClient::RequestTimeout
       session[:notice] = "bitcoind timed out"
     end
-    erb :create, :locals => {:stats => stats}
+    erb :create, :locals => {:stats => stats, :redis_up => redis_up}
   end
 
   get %r{/([a-z0-9-]{36})} do
@@ -86,13 +86,13 @@ module SmallestEscrow
 
   # admin
   get "/admin" do
-    begin
-      erb :admin, :locals => {:stats => BITBANK.info, 
-                              :dwolla_token => SmallestEscrow::Dwolla::Auth.get_token}
-    rescue RestClient::RequestTimeout
-      session[:notice] = "bitcoind timed out"
+    locals = before_action
+    redis_up = Util.tcp_accepting?(6380)
+    if redis_up
+      token = SmallestEscrow::Dwolla::Auth.get_token
     end
-
+    erb :admin, :locals => locals.merge({:dwolla_token => token,
+                                         :redis_up => redis_up})
   end
 
   get "/dwolla/auth" do
@@ -134,6 +134,16 @@ module SmallestEscrow
     puts time_msg
   end
 
+  def before_action
+    begin
+      bit_stats = BITBANK.info
+    rescue RestClient::RequestTimeout
+      session[:notice] = "bitcoind timed out"
+    rescue RestClient::Unauthorized
+      session[:notice] = "bitcoind authorization failed"
+    end
+    {:stats => bit_stats}
+  end
  end
 end
 
