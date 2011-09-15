@@ -51,7 +51,7 @@ module SmallestEscrow
     response = DWOLLA.request(offer)
     log("#{offer} dwolla response #{response.inspect}")
     if response["Result"] == "Success"
-      offer.dwolla_request_payment_key = response["CheckoutId"]
+      offer.dwolla_checkout_id = response["CheckoutId"]
       offer.save
       redirect to("https://www.dwolla.com/payment/checkout/"+response["CheckoutId"])
     else
@@ -110,19 +110,20 @@ module SmallestEscrow
     redirect to("/admin")
   end
 
-  post "/dwolla/payment/*" do |uuid|
+  post "/dwolla/payment" do
     log("dwolla/payment: uuid: #{uuid} params: #{params.inspect}")
     jparams = JSON.parse(request.body.read)
     log("dwolla/payment: jparams #{jparams.inspect}")
-    deal = Deal.true_load(uuid)
-    deal.dwolla_tx_id = jparams["TransactionId"]
-    deal.save
+    deal = Deal.true_load(jparams["OrderId"])
+    if deal.dwolla_checkout_id == jparams["CheckoutId"]
+      deal.dwolla_tx_id = jparams["TransactionId"]
+      deal.save
+    end
   end
 
   private
   def log(msg)
     time_msg = "#{Time.now.strftime("%Y-%m-%d %I:%M%P")} #{msg}"
-    #File.open("log","a"){|f| f.write "#{time_msg}\n"}
     puts time_msg
   end
 

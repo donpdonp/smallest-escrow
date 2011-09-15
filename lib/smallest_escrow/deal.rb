@@ -2,12 +2,13 @@ module SmallestEscrow
  class Deal
   include DataMapper::Resource
 
-  property :uuid,   String, :key => true
-  property :btc,    String
-  property :btc_receiving_address,    String
-  property :usd,    String
+  property :uuid,                       String, :key => true
+  property :btc,                        String
+  property :btc_receiving_address,      String
+  property :usd,                        String
+  property :dwolla_checkout_id,         String
   property :dwolla_request_payment_key, String
-  property :dwolla_tx_id, String
+  property :dwolla_tx_id,               String
 
   def self.parse(uuid, data)
     {:uuid => uuid,
