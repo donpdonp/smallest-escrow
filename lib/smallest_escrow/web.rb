@@ -10,12 +10,8 @@ module SmallestEscrow
   set :show_execptions, true
   
   get '/' do
-    begin
-      stats = BITBANK.info
-    rescue RestClient::RequestTimeout
-      session[:notice] = "bitcoind timed out"
-    end
-    erb :create, :locals => {:stats => stats, :redis_up => redis_up}
+    locals = before_action
+    erb :create, :locals => locals
   end
 
   get %r{/([a-z0-9-]{36})} do
@@ -141,6 +137,8 @@ module SmallestEscrow
       session[:notice] = "bitcoind timed out"
     rescue RestClient::Unauthorized
       session[:notice] = "bitcoind authorization failed"
+    rescue Errno::ECONNREFUSED
+      session[:notice] = "bitcoind not ready"
     end
     {:stats => bit_stats}
   end

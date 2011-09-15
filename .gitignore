@@ -1,5 +1,4 @@
-bitbank.yml
-dwolla.yml
+config.yml
 log
 .bluepill/
 .bundle/

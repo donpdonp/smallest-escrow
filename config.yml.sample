@@ -1,0 +1,20 @@
+rack:
+  :map: "/"
+
+datamapper:
+  :adapter: "redis"
+  :host: "localhost"
+  :port: 6380
+
+bitbank:
+  :username: minerguy
+  :password: coinsecret
+
+dwolla:
+  :key: ---------------key---------------
+  :secret: ---------------secret----------------
+  :receiving_address: XXX-XXX-XXXX
+  :soap_key: -soap-key-
+  :soap_secret: -soap-secret-
+  :host: http://my-escrow-service.local/
+

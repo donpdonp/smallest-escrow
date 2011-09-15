@@ -8,14 +8,19 @@ require 'oauth'
 
 require 'smallest_escrow/deal'
 require 'smallest_escrow/util'
+require 'smallest_escrow/web'
 require 'smallest_escrow/dwolla/api'
 require 'smallest_escrow/dwolla/auth'
 
+module SmallestEscrow
+  Config = YAML.load(File.open('config.yml'))
+end
+
 # Datamapper
-DataMapper.setup(:default, {:adapter  => "redis", :host => "localhost", :port => 6380})
+DataMapper.setup(:default, SmallestEscrow::Config["datamapper"])
 
 # bitcoind
-BITBANK = Bitbank.new('bitbank.yml')
+BITBANK = Bitbank.new(SmallestEscrow::Config["bitbank"])
 
 # Dwolla
-DWOLLA = SmallestEscrow::Dwolla::API.new('dwolla.yml')
+DWOLLA = SmallestEscrow::Dwolla::API.new(SmallestEscrow::Config["dwolla"])

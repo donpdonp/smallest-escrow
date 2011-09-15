@@ -1,8 +1,8 @@
 module SmallestEscrow
   module Dwolla
     class API
-      def initialize(yml_config)
-        @config = YAML.load(File.open(yml_config))
+      def initialize(config)
+        @config = config
         @soap = Savon::Client.new { wsdl.document = "https://www.dwolla.com/api/API.svc?wsdl"}
         @rest = Faraday.new(:url => 'https://www.dwolla.com') do |builder|
                   builder.request  :json
