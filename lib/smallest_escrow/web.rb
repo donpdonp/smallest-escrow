@@ -77,6 +77,13 @@ module SmallestEscrow
     redirect to("/#{offer.uuid}")
   end
 
+  post "/usd_refund" do
+    deal = Deal.true_load(params[:uuid])
+    if deal.usd_paid?
+      log("usd_refund: refunding")
+    end
+  end
+
   # admin
   get "/admin" do
     begin

@@ -40,15 +40,15 @@
      <% end %>
    </div>
    <div class="progress">
-     <div class="delivery_address">
-       Escrow Dwolla account: <%= DWOLLA.receiving_address %>
-     </div>
-
       <% if offer.usd_paid? %>
         Paid. Transaction id #<%= offer.dwolla_tx_id%>
+        <form action="usd_refund" method="post">
+          <input type="hidden" name="uuid" value="<%=offer.uuid%>">
+          <input type="submit" value="Refund">
+        </form>
       <% else %>
        <form action="dwolla_from" method="post"> 
-        Initiate transfer: 
+        Initiate Dwolla transfer: 
         <input type="hidden" name="uuid" value="<%=offer.uuid%>">
         <input type="submit" value="Dwolla Transfer">
        </form>
