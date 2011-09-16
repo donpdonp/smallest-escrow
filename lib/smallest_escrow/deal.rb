@@ -8,7 +8,9 @@ module SmallestEscrow
   property :usd,                        String
   property :dwolla_checkout_id,         String
   property :dwolla_request_payment_key, String
-  property :dwolla_tx_id,               String
+  property :dwolla_tx_in,               String, :index => true
+  property :dwolla_tx_refund,           String
+  property :dwolla_tx_out,              String
 
   def self.parse(uuid, data)
     {:uuid => uuid,
@@ -30,7 +32,7 @@ module SmallestEscrow
   end
 
   def usd_paid?
-    !!dwolla_tx_id
+    !!dwolla_tx_in
   end
  end
 end

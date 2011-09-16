@@ -118,8 +118,8 @@ module SmallestEscrow
     log("dwolla/payment: jparams #{jparams.inspect}")
     deal = Deal.true_load(jparams["OrderId"])
     if deal.dwolla_checkout_id == jparams["CheckoutId"]
-      log("dwolla/payment: CheckId matches. Saving TransactionId")
       deal.dwolla_tx_id = jparams["TransactionId"]
+      log("dwolla/payment: CheckId matches. Saving TransactionId #{deal.dwolla_tx_id}")
       deal.save
     end
   end
