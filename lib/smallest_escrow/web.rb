@@ -35,17 +35,21 @@ module SmallestEscrow
   end
 
   post '/dwolla_checkout' do
-    offer = Deal.true_load(params[:uuid])
-    response = DWOLLA.checkout(offer)
-    log("#{offer} dwolla response #{response.inspect}")
-    if response["Result"] == "Success"
-      offer.dwolla_checkout_id = response["CheckoutId"]
-      offer.save
-      redirect to(DWOLLA.checkout_url(response["CheckoutId"]))
+    deal = Deal.true_load(params[:uuid])
+    if deal.dwolla_checkout_id
+        redirect to(DWOLLA.checkout_url(deal.dwolla_checkout_id))
     else
-      session[:notice] = "Dwolla failure: #{response["Message"]}"
+      response = DWOLLA.checkout(deal)
+      log("#{deal} dwolla response #{response.inspect}")
+      if response["Result"] == "Success"
+        deal.dwolla_checkout_id = response["CheckoutId"]
+        deal.save
+        redirect to(DWOLLA.checkout_url(response["CheckoutId"]))
+      else
+        session[:notice] = "Dwolla failure: #{response["Message"]}"
+        redirect to("/#{deal.uuid}")
+      end
     end
-    redirect to("/#{offer.uuid}")
   end
 
   post "/btc_refund" do
