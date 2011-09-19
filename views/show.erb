@@ -47,7 +47,7 @@
           <input type="submit" value="Refund">
         </form>
       <% else %>
-       <form action="dwolla_from" method="post"> 
+       <form action="dwolla_checkout" method="post"> 
         Initiate Dwolla transfer: 
         <input type="hidden" name="uuid" value="<%=offer.uuid%>">
         <input type="submit" value="Dwolla Transfer">

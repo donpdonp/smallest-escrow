@@ -22,7 +22,7 @@ module SmallestEscrow
       # Redirect path comes back with extra fields:
       # checkoutid=b32683b5-9597-42a8-a8c8-741633e07d2f&transaction=257871&postback=failure&orderid=1.1771473012599911E+38
       # Callback is a POST with JSON in the body: '{"Amount":1.0000,"OrderId":null,"Status":"Completed","TransactionId":257892,"TestMode":false}'
-      def request(deal)
+      def checkout(deal)
         data = { :Key => @config['key'],
                  :Secret => @config['secret'],
                  :OrderId => deal.uuid,
@@ -41,7 +41,7 @@ module SmallestEscrow
         JSON.parse(result.body)
       end
 
-      def checkout(id)
+      def checkout_url(id)
         "https://www.dwolla.com/payment/checkout/#{id}"
       end
 

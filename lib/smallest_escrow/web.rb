@@ -18,8 +18,8 @@ module SmallestEscrow
     offer = Deal.true_load(params[:captures].first)
     if offer
       log("load #{offer}")
-      locals = before_action.merge({:btc_tx => offer.btc_transactions, :offer => offer})
-      puts locals.inspect
+      locals = before_action
+      locals.merge!({:btc_tx => offer.btc_transactions, :offer => offer})
       erb :show, :locals => locals
     else
       "Escrow deal not found."
@@ -34,14 +34,14 @@ module SmallestEscrow
     redirect to("/#{offer.uuid}")
   end
 
-  post '/dwolla_from' do
+  post '/dwolla_checkout' do
     offer = Deal.true_load(params[:uuid])
-    response = DWOLLA.request(offer)
+    response = DWOLLA.checkout(offer)
     log("#{offer} dwolla response #{response.inspect}")
     if response["Result"] == "Success"
       offer.dwolla_checkout_id = response["CheckoutId"]
       offer.save
-      redirect to("https://www.dwolla.com/payment/checkout/"+response["CheckoutId"])
+      redirect to(DWOLLA.checkout_url(response["CheckoutId"]))
     else
       session[:notice] = "Dwolla failure: #{response["Message"]}"
     end
