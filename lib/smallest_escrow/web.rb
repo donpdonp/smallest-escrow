@@ -21,6 +21,8 @@ module SmallestEscrow
       locals = before_action.merge({:btc_tx => offer.btc_transactions, :offer => offer})
       puts locals.inspect
       erb :show, :locals => locals
+    else
+      "Escrow deal not found."
     end
   end
 
