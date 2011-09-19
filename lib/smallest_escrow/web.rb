@@ -16,22 +16,12 @@ module SmallestEscrow
 
   get %r{/([a-z0-9-]{36})} do
     offer = Deal.true_load(params[:captures].first)
-    log("load #{offer}")
-    begin
-      timer = Time.now
-      btc_tx = BITBANK.account_by_address(offer.btc_receiving_address).transactions
-      log("bitcoin transactions loaded in #{Time.now - timer} seconds")
-      stats = BITBANK.info
-    rescue RestClient::RequestTimeout
-      session[:notice] = "bitcoind timed out"
+    if offer
+      log("load #{offer}")
+      locals = before_action.merge({:btc_tx => offer.btc_transactions, :offer => offer})
+      puts locals.inspect
+      erb :show, :locals => locals
     end
-    timer = Time.now
-    cred = SmallestEscrow::Dwolla::Auth.get_token
-    dwolla_at = DWOLLA.access_token(cred)
-    dwolla_tx = []#JSON.parse(dwolla_at.get("https://www.dwolla.com/oauth/rest/accountapi/transactions").body)
-    log("dwolla transactions loaded in #{Time.now - timer} seconds")
-    log("dwolla transactions: #{dwolla_tx.inspect}")
-    erb :show, :locals => {:offer => offer, :stats => stats, :btc_tx => btc_tx, :dwolla_tx => dwolla_tx}
   end
 
   post '/create' do

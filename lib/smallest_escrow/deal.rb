@@ -34,6 +34,16 @@ module SmallestEscrow
   def usd_paid?
     !!dwolla_tx_in
   end
+
+  def btc_transactions
+    btc_tx = BITBANK.account_by_address(btc_receiving_address).transactions
+  end
+
+  def usd_transactions
+    cred = SmallestEscrow::Dwolla::Auth.get_token
+    dwolla_at = DWOLLA.access_token(cred)
+    dwolla_tx = JSON.parse(dwolla_at.get("https://www.dwolla.com/oauth/rest/accountapi/transactions").body)
+  end
  end
 end
 
